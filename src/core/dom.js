@@ -13,12 +13,12 @@ class Dom {
     return this.$el.outerHTML.trim()
   }
 
-  text(text){
-    if(typeof text === 'string'){
+  text(text) {
+    if (typeof text !== 'undefined') {
       this.$el.textContent = text
       return this
     }
-    if(this.$el.tagName.toLowerCase() === 'input'){
+    if (this.$el.tagName.toLowerCase() === 'input') {
       return this.$el.value.trim()
     }
     return this.$el.textContent.trim()
@@ -33,7 +33,7 @@ class Dom {
     this.$el.addEventListener(eventType, callback)
   }
 
-  off(eventType, callback){
+  off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback)
   }
 
@@ -50,7 +50,7 @@ class Dom {
     return this
   }
 
-  get data(){
+  get data() {
     return this.$el.dataset
   }
 
@@ -58,7 +58,7 @@ class Dom {
     return $(this.$el.closest(selector))
   }
 
-  getCoords(){
+  getCoords() {
     return this.$el.getBoundingClientRect()
   }
 
@@ -80,12 +80,19 @@ class Dom {
     return this
   }
 
+  getStyles(styles = []) {
+    return styles.reduce((res, s) => {
+      res[s] = this.$el.style[s]
+      return res
+    }, {})
+  }
+
   id(parse) {
-    if(parse){
+    if (parse) {
       const parsed = this.id().split(':')
       return {
         row: +parsed[0],
-        col: +parsed[1]
+        col: +parsed[1],
       }
     }
     return this.data.id
@@ -94,6 +101,14 @@ class Dom {
   focus() {
     this.$el.focus()
     return this
+  }
+
+  attr(name, value) {
+    if(typeof value !== 'undefined') {
+      this.$el.setAttribute(name, value)
+      return this
+    }
+    return this.$el.getAttribute(name)
   }
 
 }
