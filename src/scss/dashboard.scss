@@ -79,15 +79,13 @@
       border-radius: 25px;
     }
 
-    a {
-      text-decoration: none;
-      cursor: pointer;
-      color: #202124;
-      font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #202124;
+    font-size: 14px;
 
-      &:hover {
-        text-decoration: underline;
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 
